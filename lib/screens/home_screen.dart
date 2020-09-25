@@ -1,8 +1,24 @@
 import 'package:flutter/cupertino.dart';
-
+import 'package:permission/permission.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  GoogleMapController mapController;
+
+  PermissionName permissionName = PermissionName.Location;
+
+  final LatLng _center = const LatLng(-7.23056, -35.88111);
+
+  void _onMapCreated(GoogleMapController controller) {
+    mapController = controller;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,11 +38,10 @@ class HomeScreen extends StatelessWidget {
       ),
       body: Container(
         width: double.infinity,
-        child: Text('mapa',
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 16.0,
-            )),
+        child: GoogleMap(
+          onMapCreated: _onMapCreated,
+          initialCameraPosition: CameraPosition(target: _center, zoom: 11.0),
+        ),
       ),
       bottomNavigationBar: Container(
         child: Card(
