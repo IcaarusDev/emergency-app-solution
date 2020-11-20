@@ -1,4 +1,4 @@
 # Emergency App
 
-A simple application thats help you on a emergency situation.
+A simple application that helps you on a emergency situation.
 
